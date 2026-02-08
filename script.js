@@ -157,113 +157,88 @@ document.addEventListener('DOMContentLoaded', () => {
         if (validateCurrentStep()) {
             const submitBtnText = submitBtn.innerHTML;
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span class="spinner"></span> Submitting...';
+            submitBtn.innerHTML = '<span class="spinner"></span> Capturing Strategy...';
 
             const formData = new FormData(form);
             const data = {};
 
-            // Correctly handle multi-select checkboxes
             formData.forEach((value, key) => {
                 if (data[key]) {
-                    if (Array.isArray(data[key])) {
-                        data[key].push(value);
-                    } else {
-                        data[key] = [data[key], value];
-                    }
-                } else {
-                    data[key] = value;
-                }
+                    if (Array.isArray(data[key])) { data[key].push(value); }
+                    else { data[key] = [data[key], value]; }
+                } else { data[key] = value; }
             });
 
-            // Convert arrays to comma-separated strings for Google Sheets
             for (let key in data) {
-                if (Array.isArray(data[key])) {
-                    data[key] = data[key].join(', ');
-                }
+                if (Array.isArray(data[key])) { data[key] = data[key].join(', '); }
             }
 
-            // --- GOOGLE SHEETS INTEGRATION ---
-            // Replace the URL below with your deployed Google Apps Script Web App URL
             const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwOF7LI-Gzxp4UAVg5C3jNEZpMxJF6mM3x8EkRoS2G-fGWm3maDSgMVdFWGx9Ud_PL3/exec";
 
-            try {
-                if (SCRIPT_URL !== "YOUR_GOOGLE_SCRIPT_URL_HERE" && SCRIPT_URL !== "") {
-                    // Use URLSearchParams for a 'simple' POST request that avoids CORS preflight
-                    const params = new URLSearchParams();
-                    for (const key in data) {
-                        params.append(key, data[key]);
-                    }
+            // --- UI SUCCESS TRANSITION (Move this up for instant response) ---
+            const showSuccess = (finalData) => {
+                const discoveryCard = document.getElementById('discoveryCard');
+                if (discoveryCard) discoveryCard.style.display = 'none';
 
-                    await fetch(SCRIPT_URL, {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                        body: params.toString()
-                    });
-                } else {
-                    console.log("Mock Submission (No URL provided):", data);
-                    await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate delay
-                }
+                const completionCard = document.getElementById('completionCard');
+                if (completionCard) completionCard.style.display = 'block';
 
-                // UI Transition on Success
-                sections.forEach(s => s.style.display = 'none');
-                document.getElementById('discoveryCard').style.display = 'none'; // Hide form card
-                document.getElementById('completionCard').style.display = 'block';
                 document.querySelector('.nav-buttons').style.display = 'none';
                 document.querySelector('.progress-container').style.opacity = '0';
 
-                // Add Download Button to Completion Card
                 const actionContainer = document.getElementById('pdfActionContainer');
-                actionContainer.innerHTML = ''; // Clear existing
+                if (actionContainer) {
+                    actionContainer.innerHTML = '';
 
-                const downloadBtn = document.createElement('button');
-                downloadBtn.className = 'btn btn-primary';
-                downloadBtn.style.margin = '10px';
-                downloadBtn.innerHTML = '📥 Download Brand strategy PDF';
-                downloadBtn.onclick = () => generatePDF(data);
+                    const downloadBtn = document.createElement('button');
+                    downloadBtn.className = 'btn btn-primary';
+                    downloadBtn.style.margin = '10px';
+                    downloadBtn.innerHTML = '📥 Download Strategy PDF';
+                    downloadBtn.onclick = () => generatePDF(finalData);
 
-                const printBtn = document.createElement('button');
-                printBtn.className = 'btn btn-secondary';
-                printBtn.style.margin = '10px';
-                printBtn.innerHTML = '🖨️ Print Response copy';
-                printBtn.onclick = () => window.print();
+                    const printBtn = document.createElement('button');
+                    printBtn.className = 'btn btn-secondary';
+                    printBtn.style.margin = '10px';
+                    printBtn.innerHTML = '🖨️ Print Copy';
+                    printBtn.onclick = () => window.print();
 
-                // Add WhatsApp Button for instant notification
-                const whatsappBtn = document.createElement('button');
-                whatsappBtn.className = 'btn';
-                whatsappBtn.style.margin = '10px';
-                whatsappBtn.style.background = '#25D366';
-                whatsappBtn.style.color = 'white';
-                whatsappBtn.innerHTML = '💬 Send Strategy to Expert';
-                whatsappBtn.onclick = () => {
-                    const platform = data.platform_name || 'N/A';
-                    const essence = data.brand_essence || 'N/A';
-                    const audience = data.usage_group || 'N/A';
-                    const personality = data.personality || 'N/A';
+                    const whatsappBtn = document.createElement('button');
+                    whatsappBtn.className = 'btn';
+                    whatsappBtn.style.margin = '10px';
+                    whatsappBtn.style.background = '#25D366';
+                    whatsappBtn.style.color = 'white';
+                    whatsappBtn.innerHTML = '💬 WhatsApp Expert';
+                    whatsappBtn.onclick = () => {
+                        const summary = `*🚀 New Brand Discovery Brief*\n\n` +
+                            `*Platform:* ${finalData.platform_name || 'N/A'}\n` +
+                            `*Essence:* ${finalData.brand_essence || 'N/A'}\n\n` +
+                            `_View full PDF details attached in next message._`;
+                        window.open(`https://wa.me/919446976393?text=${encodeURIComponent(summary)}`);
+                    };
 
-                    const summary = `*🚀 New Brand Discovery Brief*\n\n` +
-                        `*Platform:* ${platform}\n` +
-                        `*One-Line Essence:* ${essence}\n` +
-                        `*Target Audience:* ${audience}\n` +
-                        `*Personality:* ${personality}\n\n` +
-                        `_Sent via Polaroid Dosa Strategy App_`;
-
-                    const msg = encodeURIComponent(summary);
-                    window.open(`https://wa.me/919446976393?text=${msg}`);
-                };
-
-                actionContainer.appendChild(downloadBtn);
-                actionContainer.appendChild(printBtn);
-                actionContainer.appendChild(whatsappBtn);
-
+                    actionContainer.appendChild(downloadBtn);
+                    actionContainer.appendChild(printBtn);
+                    actionContainer.appendChild(whatsappBtn);
+                }
                 createFloatingSparkles();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
 
-            } catch (error) {
-                console.error('Submission failed:', error);
-                alert('There was an error submitting your form. Please try again.');
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = submitBtnText;
+            // Background Fetch
+            if (SCRIPT_URL && SCRIPT_URL.includes("macros")) {
+                const params = new URLSearchParams();
+                for (const key in data) { params.append(key, data[key]); }
+
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: params.toString()
+                }).catch(err => console.warn("Cloud sync background:", err));
             }
+
+            // Always show success screen after a short delay
+            setTimeout(() => showSuccess(data), 800);
         }
     });
 

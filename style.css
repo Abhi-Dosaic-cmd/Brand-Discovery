@@ -339,37 +339,58 @@ textarea:focus {
 
 .scale-row {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    /* Force horizontal */
     gap: 1.5rem;
     align-items: center;
+    justify-content: space-between;
 }
 
-.scale-labels {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    color: var(--text-muted);
+.scale-label {
+    flex: 1;
     font-size: 0.9rem;
+    color: var(--text-muted);
     font-weight: 500;
+}
+
+.scale-label.left {
+    text-align: right;
+}
+
+.scale-label.right {
+    text-align: left;
 }
 
 .scale-options {
     display: flex;
-    gap: 1rem;
+    gap: 0.75rem;
     justify-content: center;
+    flex-shrink: 0;
 }
 
 .scale-option {
     width: 45px;
     height: 45px;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1.5px solid var(--border-color);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 700;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1.5px solid var(--border-color);
+    cursor: pointer;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    font-weight: 700;
+}
+
+@media (max-width: 600px) {
+    .scale-row {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .scale-label {
+        text-align: center !important;
+    }
 }
 
 .scale-option:hover {

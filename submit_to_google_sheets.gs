@@ -59,6 +59,21 @@ function doPost(e) {
 
     sheet.appendRow(newRow);
 
+    // --- NEW: Email Notification Backup ---
+    try {
+      const emailAddress = Session.getEffectiveUser().getEmail();
+      const subject = `🔥 New Brand Discovery: ${data.platform_name || 'Anonymous'}`;
+      let body = "A new brand discovery brief has been submitted!\n\n";
+      
+      for (let key in data) {
+        body += `${key}: ${data[key]}\n`;
+      }
+      
+      MailApp.sendEmail(emailAddress, subject, body);
+    } catch (e) {
+      // Ignore mail errors to ensure sheet storage still completes
+    }
+
     return ContentService.createTextOutput(JSON.stringify({ "result": "success" }))
       .setMimeType(ContentService.MimeType.JSON);
 

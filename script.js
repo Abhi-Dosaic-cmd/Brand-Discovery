@@ -228,8 +228,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 printBtn.innerHTML = '🖨️ Print Response copy';
                 printBtn.onclick = () => window.print();
 
+                // Add WhatsApp Button for instant notification
+                const whatsappBtn = document.createElement('button');
+                whatsappBtn.className = 'btn';
+                whatsappBtn.style.margin = '10px';
+                whatsappBtn.style.background = '#25D366';
+                whatsappBtn.style.color = 'white';
+                whatsappBtn.innerHTML = '💬 Send to Strategy Expert';
+                whatsappBtn.onclick = () => {
+                    const msg = encodeURIComponent(`Hi! I just finished the Brand Discovery for ${data.platform_name || 'my project'}. Let's discuss!`);
+                    window.open(`https://wa.me/911234567890?text=${msg}`); // Replace with your number
+                };
+
                 actionContainer.appendChild(downloadBtn);
                 actionContainer.appendChild(printBtn);
+                actionContainer.appendChild(whatsappBtn);
 
                 createFloatingSparkles();
 

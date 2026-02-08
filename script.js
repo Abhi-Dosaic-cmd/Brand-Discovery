@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     downloadBtn.style.margin = '20px auto';
                     downloadBtn.style.display = 'block';
                     downloadBtn.style.minWidth = '280px';
-                    downloadBtn.innerHTML = '� Download Brand Strategy Brief (PDF)';
+                    downloadBtn.innerHTML = '📥 Download Brand Strategy Brief (PDF)';
                     downloadBtn.onclick = () => generatePDF(finalData);
 
                     actionContainer.appendChild(downloadBtn);

@@ -234,10 +234,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 whatsappBtn.style.margin = '10px';
                 whatsappBtn.style.background = '#25D366';
                 whatsappBtn.style.color = 'white';
-                whatsappBtn.innerHTML = '💬 Send to Strategy Expert';
+                whatsappBtn.innerHTML = '💬 Send Strategy to Expert';
                 whatsappBtn.onclick = () => {
-                    const msg = encodeURIComponent(`Hi! I just finished the Brand Discovery for ${data.platform_name || 'my project'}. Let's discuss!`);
-                    window.open(`https://wa.me/911234567890?text=${msg}`); // Replace with your number
+                    const platform = data.platform_name || 'N/A';
+                    const essence = data.brand_essence || 'N/A';
+                    const audience = data.usage_group || 'N/A';
+                    const personality = data.personality || 'N/A';
+
+                    const summary = `*🚀 New Brand Discovery Brief*\n\n` +
+                        `*Platform:* ${platform}\n` +
+                        `*One-Line Essence:* ${essence}\n` +
+                        `*Target Audience:* ${audience}\n` +
+                        `*Personality:* ${personality}\n\n` +
+                        `_Sent via Polaroid Dosa Strategy App_`;
+
+                    const msg = encodeURIComponent(summary);
+                    window.open(`https://wa.me/919446976393?text=${msg}`);
                 };
 
                 actionContainer.appendChild(downloadBtn);

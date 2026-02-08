@@ -192,33 +192,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     const downloadBtn = document.createElement('button');
                     downloadBtn.className = 'btn btn-primary';
-                    downloadBtn.style.margin = '10px';
-                    downloadBtn.innerHTML = '📥 Download Strategy PDF';
+                    downloadBtn.style.margin = '20px auto';
+                    downloadBtn.style.display = 'block';
+                    downloadBtn.style.minWidth = '280px';
+                    downloadBtn.innerHTML = '� Download Brand Strategy Brief (PDF)';
                     downloadBtn.onclick = () => generatePDF(finalData);
 
-                    const printBtn = document.createElement('button');
-                    printBtn.className = 'btn btn-secondary';
-                    printBtn.style.margin = '10px';
-                    printBtn.innerHTML = '🖨️ Print Copy';
-                    printBtn.onclick = () => window.print();
-
-                    const whatsappBtn = document.createElement('button');
-                    whatsappBtn.className = 'btn';
-                    whatsappBtn.style.margin = '10px';
-                    whatsappBtn.style.background = '#25D366';
-                    whatsappBtn.style.color = 'white';
-                    whatsappBtn.innerHTML = '💬 WhatsApp Expert';
-                    whatsappBtn.onclick = () => {
-                        const summary = `*🚀 New Brand Discovery Brief*\n\n` +
-                            `*Platform:* ${finalData.platform_name || 'N/A'}\n` +
-                            `*Essence:* ${finalData.brand_essence || 'N/A'}\n\n` +
-                            `_View full PDF details attached in next message._`;
-                        window.open(`https://wa.me/919446976393?text=${encodeURIComponent(summary)}`);
-                    };
-
                     actionContainer.appendChild(downloadBtn);
-                    actionContainer.appendChild(printBtn);
-                    actionContainer.appendChild(whatsappBtn);
                 }
                 createFloatingSparkles();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -291,12 +271,12 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 title: "Brand Personality", items: [
-                    { label: "Traits", key: "personality" },
-                    { label: "Casual vs. Professional", key: "casual_vs_pro" },
-                    { label: "Playful vs. Serious", key: "playful_vs_serious" },
-                    { label: "Bold vs. Calm", key: "bold_vs_calm" },
-                    { label: "Minimal vs. Detailed", key: "minimal_vs_detailed" },
-                    { label: "Young vs. Mature", key: "young_vs_mature" }
+                    { label: "Personality Traits", key: "personality" },
+                    { label: "Friendly (1) vs Professional (5)", key: "casual_vs_pro" },
+                    { label: "Fun (1) vs Serious (5)", key: "playful_vs_serious" },
+                    { label: "Bold (1) vs Calm (5)", key: "bold_vs_calm" },
+                    { label: "Minimal (1) vs Detailed (5)", key: "minimal_vs_detailed" },
+                    { label: "Young (1) vs Mature (5)", key: "young_vs_mature" }
                 ]
             },
             {

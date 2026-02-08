@@ -277,34 +277,93 @@ document.addEventListener('DOMContentLoaded', () => {
         const pageWidth = 170;
 
         const sections = [
-            { title: "Core Essence", key: "platform_description" },
-            { title: "Target Audience", key: "usage_group" },
-            { title: "Brand Personality", key: "personality" },
-            { title: "Visual Style", key: "mood" },
-            { title: "The 'X for Y' Statement", key: "brand_essence" }
+            {
+                title: "Core Basics", items: [
+                    { label: "Description", key: "platform_description" },
+                    { label: "Current Stage", key: "stage" }
+                ]
+            },
+            {
+                title: "Target Audience", items: [
+                    { label: "User Groups", key: "usage_group" },
+                    { label: "Age Group", key: "age_group" }
+                ]
+            },
+            {
+                title: "Brand Personality", items: [
+                    { label: "Traits", key: "personality" },
+                    { label: "Casual vs. Professional", key: "casual_vs_pro" },
+                    { label: "Playful vs. Serious", key: "playful_vs_serious" },
+                    { label: "Bold vs. Calm", key: "bold_vs_calm" },
+                    { label: "Minimal vs. Detailed", key: "minimal_vs_detailed" },
+                    { label: "Young vs. Mature", key: "young_vs_mature" }
+                ]
+            },
+            {
+                title: "Brand Voice & Tone", items: [
+                    { label: "Tone to Avoid", key: "avoid_tone" }
+                ]
+            },
+            {
+                title: "Look & Feel", items: [
+                    { label: "Visual Mood", key: "mood" },
+                    { label: "Color Preferences", key: "color_preferences" },
+                    { label: "Inspirations", key: "brand_inspiration" }
+                ]
+            },
+            {
+                title: "User Experience", items: [
+                    { label: "Desired User Feelings", key: "feelings" }
+                ]
+            },
+            {
+                title: "Brand Essence", items: [
+                    { label: "The 'X for Y' Statement", key: "brand_essence" }
+                ]
+            },
+            {
+                title: "Other Details", items: [
+                    { label: "Additional Info", key: "additional_info" }
+                ]
+            }
         ];
 
         sections.forEach(section => {
-            if (yPos > 270) {
-                doc.addPage();
-                yPos = 20;
-            }
-
+            if (yPos > 250) { doc.addPage(); yPos = 30; }
             doc.setFont("helvetica", "bold");
-            doc.setFontSize(12);
+            doc.setFontSize(13);
             doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
             doc.text(section.title.toUpperCase(), margin, yPos);
+            yPos += 10;
 
-            yPos += 7;
-            doc.setFont("helvetica", "normal");
-            doc.setFontSize(10);
-            doc.setTextColor(60, 60, 60);
+            section.items.forEach(item => {
+                const text = String(data[item.key] || "No data provided");
+                const labelContent = `${item.label}: `;
 
-            const text = data[section.key] || "No data provided";
-            const splitText = doc.splitTextToSize(text, pageWidth);
-            doc.text(splitText, margin, yPos);
+                doc.setFont("helvetica", "bold");
+                doc.setFontSize(10);
+                doc.setTextColor(30, 30, 30);
 
-            yPos += (splitText.length * 5) + 15;
+                const labelWidth = doc.getTextWidth(labelContent);
+
+                if (yPos > 275) { doc.addPage(); yPos = 30; }
+
+                if (text.length > 60) {
+                    doc.text(labelContent, margin, yPos);
+                    yPos += 6;
+                    doc.setFont("helvetica", "normal");
+                    const splitText = doc.splitTextToSize(text, pageWidth);
+                    doc.text(splitText, margin, yPos);
+                    yPos += (splitText.length * 5) + 10;
+                } else {
+                    doc.text(labelContent, margin, yPos);
+                    doc.setFont("helvetica", "normal");
+                    doc.text(text, margin + labelWidth, yPos);
+                    yPos += 10;
+                }
+            });
+
+            yPos += 5;
         });
 
         // --- Footer ---

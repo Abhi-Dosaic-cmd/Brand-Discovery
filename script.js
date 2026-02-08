@@ -233,8 +233,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function generatePDF(data) {
+        if (!window.jspdf) {
+            alert("PDF library is still loading. Please wait a moment and try again.");
+            return;
+        }
         const { jsPDF } = window.jspdf;
-        const doc = jsPDF();
+        const doc = new jsPDF();
         const primaryColor = [243, 169, 59]; // #f3a93b
 
         // --- Document Header ---

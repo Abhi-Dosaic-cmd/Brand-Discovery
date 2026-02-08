@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // --- GOOGLE SHEETS INTEGRATION ---
             // Replace the URL below with your deployed Google Apps Script Web App URL
-            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby1lba0v4akRGfz-liPu7oqBAcgNysfaH3rJwSKjmRzvR5CjGVWE4aAoqmZgQB2x8uO/exec";
+            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwOF7LI-Gzxp4UAVg5C3jNEZpMxJF6mM3x8EkRoS2G-fGWm3maDSgMVdFWGx9Ud_PL3/exec";
 
             try {
                 if (SCRIPT_URL !== "YOUR_GOOGLE_SCRIPT_URL_HERE" && SCRIPT_URL !== "") {

@@ -1,17 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap');
 
 :root {
-    --bg-color: #020617;
-    --card-bg: rgba(15, 23, 42, 0.6);
-    --primary-color: #8b5cf6;
-    --primary-glow: rgba(139, 92, 246, 0.3);
-    --secondary-color: #06b6d4;
-    --accent-color: #f43f5e;
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --border-color: rgba(255, 255, 255, 0.08);
-    --glass-blur: blur(16px);
-    --transition-smooth: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    --bg-color: #050505;
+    --card-bg: rgba(20, 20, 20, 0.7);
+    --primary-color: #f3a93b;
+    /* Polaroid Dosa Orange */
+    --primary-glow: rgba(243, 169, 59, 0.2);
+    --secondary-color: #ffffff;
+    --accent-color: #f3a93b;
+    --text-main: #ffffff;
+    --text-muted: #a1a1aa;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --glass-blur: blur(20px);
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * {
@@ -81,11 +82,25 @@ h3 {
     font-size: 3.5rem;
     font-weight: 800;
     letter-spacing: -0.02em;
-    background: linear-gradient(135deg, #fff 30%, var(--secondary-color) 100%);
+    background: linear-gradient(135deg, #fff 30%, var(--primary-color) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 0.5rem;
+}
+
+.brand-logo {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 0 15px var(--primary-glow));
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
 }
 
 .header p {

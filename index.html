@@ -4,17 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brand Discovery | Identity Questionnaire</title>
-    <meta name="description" content="A premium brand discovery form to define the identity of your next-gen platform.">
+    <title>Brand Discovery | Polaroid Dosa</title>
+    <meta name="description" content="A premium brand discovery form by Polaroid Dosa.">
     <link rel="stylesheet" href="style.css">
+    <!-- PDF Generation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 
 <body>
     <div class="bg-mesh" id="bgMesh"></div>
     <div class="container">
         <header class="header">
+            <div class="logo-container">
+                <img src="logo.png" alt="Polaroid Dosa Logo" class="brand-logo"
+                    onerror="this.src='https://api.dicebear.com/7.x/initials/svg?seed=PD&backgroundColor=f3a93b'">
+            </div>
             <h1>Brand Discovery</h1>
-            <p>Define the identity of your next-gen chat platform.</p>
+            <p>Define the identity of your next-gen platform with <strong>Polaroid Dosa</strong>.</p>
         </header>
 
         <div class="progress-container">
@@ -24,302 +30,335 @@
         </div>
 
         <form id="discoveryForm">
-            <!-- Section 1: Basics -->
-            <div class="form-section active" data-step="1">
-                <div class="card">
-                    <h2 class="section-title">Step 1: The Basics</h2>
-                    <p class="section-description">"Hi! This form will help us understand your platform better so we can
-                        create a brand that truly represents what you're building. There are no wrong answers—just share
-                        what feels right to you."</p>
+            <!-- Section 0: Card Wrapper for script control -->
+            <div id="discoveryCard">
+                <!-- Section 1: Basics -->
+                <div class="form-section active" data-step="1">
+                    <div class="card">
+                        <h2 class="section-title">Step 1: The Basics</h2>
+                        <p class="section-description">"Hi! This form will help us understand your platform better so we
+                            can
+                            create a brand that truly represents what you're building. There are no wrong answers—just
+                            share
+                            what feels right to you."</p>
 
-                    <div class="question-group">
-                        <label class="question-label">1. What is the name of your platform?<span
-                                class="required-star">*</span></label>
-                        <span class="help-text">If you don't have a final name yet, just share your working name or
-                            project name.</span>
-                        <input type="text" name="platform_name" required placeholder="e.g. Echo, Huddle, Buzz">
-                    </div>
-
-                    <div class="question-group">
-                        <label class="question-label">2. In simple words, what is your platform?<span
-                                class="required-star">*</span></label>
-                        <span class="help-text">Example: "A video chat app where small groups can hang out and talk
-                            casually"</span>
-                        <textarea name="platform_description" required
-                            placeholder="Describe the core essence..."></textarea>
-                    </div>
-
-                    <div class="question-group">
-                        <label class="question-label">3. What stage is your platform currently in?<span
-                                class="required-star">*</span></label>
-                        <div class="options-list">
-                            <label class="option-item"><input type="radio" name="stage" value="idea" required> Just an
-                                idea</label>
-                            <label class="option-item"><input type="radio" name="stage" value="building"> Building it
-                                now (in development)</label>
-                            <label class="option-item"><input type="radio" name="stage" value="testing"> Testing with
-                                early users (beta)</label>
-                            <label class="option-item"><input type="radio" name="stage" value="live"> Live and available
-                                to everyone</label>
+                        <div class="question-group">
+                            <label class="question-label">1. What is the name of your platform?<span
+                                    class="required-star">*</span></label>
+                            <span class="help-text">If you don't have a final name yet, just share your working name or
+                                project name.</span>
+                            <input type="text" name="platform_name" required placeholder="e.g. Echo, Huddle, Buzz">
                         </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Section 2: Who Is This For? -->
-            <div class="form-section" data-step="2">
-                <div class="card">
-                    <h2 class="section-title">Step 2: Who Is This For?</h2>
-                    <p class="section-description">"Understanding your users helps us create a brand they'll connect
-                        with."</p>
-
-                    <div class="question-group">
-                        <label class="question-label">4. Who will use your platform the most? (Select all that
-                            apply)<span class="required-star">*</span></label>
-                        <div class="options-list">
-                            <label class="option-item"><input type="checkbox" name="usage_group" value="students">
-                                Students (high school or college)</label>
-                            <label class="option-item"><input type="checkbox" name="usage_group" value="professionals">
-                                Working professionals</label>
-                            <label class="option-item"><input type="checkbox" name="usage_group" value="friends"> Friend
-                                groups</label>
-                            <label class="option-item"><input type="checkbox" name="usage_group" value="communities">
-                                Online communities</label>
-                            <label class="option-item"><input type="checkbox" name="usage_group" value="creators">
-                                Content creators</label>
-                            <label class="option-item"><input type="checkbox" name="usage_group" value="remote">
-                                Freelancers / remote workers</label>
-                            <label class="option-item"><input type="checkbox" name="usage_group" value="hobbyists">
-                                Hobbyists and interest groups</label>
+                        <div class="question-group">
+                            <label class="question-label">2. In simple words, what is your platform?<span
+                                    class="required-star">*</span></label>
+                            <span class="help-text">Example: "A video chat app where small groups can hang out and talk
+                                casually"</span>
+                            <textarea name="platform_description" required
+                                placeholder="Describe the core essence..."></textarea>
                         </div>
-                    </div>
 
-                    <div class="question-group">
-                        <label class="question-label">5. What age group are your main users?<span
-                                class="required-star">*</span></label>
-                        <div class="options-list">
-                            <label class="option-item"><input type="radio" name="age_group" value="u18" required> Under
-                                18</label>
-                            <label class="option-item"><input type="radio" name="age_group" value="18-24"> 18-24</label>
-                            <label class="option-item"><input type="radio" name="age_group" value="25-34"> 25-34</label>
-                            <label class="option-item"><input type="radio" name="age_group" value="35-44"> 35-44</label>
-                            <label class="option-item"><input type="radio" name="age_group" value="45+"> 45+</label>
-                            <label class="option-item"><input type="radio" name="age_group" value="all"> All
-                                ages</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Section 3: Brand Personality -->
-            <div class="form-section" data-step="3">
-                <div class="card">
-                    <h2 class="section-title">Step 3: Brand Personality</h2>
-                    <p class="section-description">"If your brand was a person, how would they act and feel? Choose what
-                        feels right."</p>
-
-                    <div class="question-group">
-                        <label class="question-label">6. How should your brand feel? (Select all that fit)<span
-                                class="required-star">*</span></label>
-                        <div class="options-list" style="grid-template-columns: 1fr 1fr;">
-                            <label class="option-item"><input type="checkbox" name="personality" value="friendly">
-                                Friendly</label>
-                            <label class="option-item"><input type="checkbox" name="personality" value="professional">
-                                Professional</label>
-                            <label class="option-item"><input type="checkbox" name="personality" value="serious">
-                                Serious and focused</label>
-                            <label class="option-item"><input type="checkbox" name="personality" value="calm"> Calm and
-                                relaxing</label>
-                            <label class="option-item"><input type="checkbox" name="personality" value="energetic">
-                                Energetic and bold</label>
-                            <label class="option-item"><input type="checkbox" name="personality" value="warm"> Warm and
-                                welcoming</label>
-                            <label class="option-item"><input type="checkbox" name="personality" value="safe"> Safe and
-                                trustworthy</label>
-                        </div>
-                    </div>
-
-                    <div class="question-group">
-                        <label class="question-label">7. Which side feels more like your brand?<span
-                                class="required-star">*</span></label>
-
-                        <div class="scale-container">
-                            <div class="scale-row">
-                                <span class="scale-label left">Friendly and casual</span>
-                                <div class="scale-options" data-scale="casual_vs_pro">
-                                    <div class="scale-option" data-value="1">1</div>
-                                    <div class="scale-option" data-value="2">2</div>
-                                    <div class="scale-option" data-value="3">3</div>
-                                    <div class="scale-option" data-value="4">4</div>
-                                    <div class="scale-option" data-value="5">5</div>
-                                </div>
-                                <span class="scale-label right">Professional and polished</span>
-                            </div>
-
-                            <div class="scale-row">
-                                <span class="scale-label left">Fun and playful</span>
-                                <div class="scale-options" data-scale="playful_vs_serious">
-                                    <div class="scale-option" data-value="1">1</div>
-                                    <div class="scale-option" data-value="2">2</div>
-                                    <div class="scale-option" data-value="3">3</div>
-                                    <div class="scale-option" data-value="4">4</div>
-                                    <div class="scale-option" data-value="5">5</div>
-                                </div>
-                                <span class="scale-label right">Serious and focused</span>
-                            </div>
-
-                            <div class="scale-row">
-                                <span class="scale-label left">Bold and loud</span>
-                                <div class="scale-options" data-scale="bold_vs_calm">
-                                    <div class="scale-option" data-value="1">1</div>
-                                    <div class="scale-option" data-value="2">2</div>
-                                    <div class="scale-option" data-value="3">3</div>
-                                    <div class="scale-option" data-value="4">4</div>
-                                    <div class="scale-option" data-value="5">5</div>
-                                </div>
-                                <span class="scale-label right">Calm and gentle</span>
-                            </div>
-
-                            <div class="scale-row">
-                                <span class="scale-label left">Simple and minimal</span>
-                                <div class="scale-options" data-scale="minimal_vs_detailed">
-                                    <div class="scale-option" data-value="1">1</div>
-                                    <div class="scale-option" data-value="2">2</div>
-                                    <div class="scale-option" data-value="3">3</div>
-                                    <div class="scale-option" data-value="4">4</div>
-                                    <div class="scale-option" data-value="5">5</div>
-                                </div>
-                                <span class="scale-label right">Rich and detailed</span>
-                            </div>
-
-                            <div class="scale-row">
-                                <span class="scale-label left">Young and fresh</span>
-                                <div class="scale-options" data-scale="young_vs_mature">
-                                    <div class="scale-option" data-value="1">1</div>
-                                    <div class="scale-option" data-value="2">2</div>
-                                    <div class="scale-option" data-value="3">3</div>
-                                    <div class="scale-option" data-value="4">4</div>
-                                    <div class="scale-option" data-value="5">5</div>
-                                </div>
-                                <span class="scale-label right">Mature and established</span>
+                        <div class="question-group">
+                            <label class="question-label">3. What stage is your platform currently in?<span
+                                    class="required-star">*</span></label>
+                            <div class="options-list">
+                                <label class="option-item"><input type="radio" name="stage" value="idea" required> Just
+                                    an
+                                    idea</label>
+                                <label class="option-item"><input type="radio" name="stage" value="building"> Building
+                                    it
+                                    now (in development)</label>
+                                <label class="option-item"><input type="radio" name="stage" value="testing"> Testing
+                                    with
+                                    early users (beta)</label>
+                                <label class="option-item"><input type="radio" name="stage" value="live"> Live and
+                                    available
+                                    to everyone</label>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Section 4: Brand Voice -->
-            <div class="form-section" data-step="4">
-                <div class="card">
-                    <h2 class="section-title">Step 4: Brand Voice</h2>
-                    <p class="section-description">"How should your platform communicate with users? Think about app
-                        messages, notifications, and website copy."</p>
+                <!-- Section 2: Who Is This For? -->
+                <div class="form-section" data-step="2">
+                    <div class="card">
+                        <h2 class="section-title">Step 2: Who Is This For?</h2>
+                        <p class="section-description">"Understanding your users helps us create a brand they'll connect
+                            with."</p>
 
-                    <div class="question-group">
-                        <label class="question-label">8. Are there any words or tone you want to AVOID?</label>
-                        <span class="help-text">Example: "No corporate jargon or technical terms" or "Nothing too cutesy
-                            or childish"</span>
-                        <textarea name="avoid_tone" placeholder="Describe what to avoid..."></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Section 5: Look & Feel -->
-            <div class="form-section" data-step="5">
-                <div class="card">
-                    <h2 class="section-title">Step 5: Look & Feel Preferences</h2>
-                    <p class="section-description">"While we'll explore many options, it helps to know what naturally
-                        attracts you."</p>
-
-                    <div class="question-group">
-                        <label class="question-label">9. Do you have any color preferences?</label>
-                        <span class="help-text">Example: "Blues and purples feel calming" or "Bright, warm colors like
-                            orange and yellow"</span>
-                        <textarea name="color_preferences" placeholder="e.g. No preference yet"></textarea>
-                    </div>
-
-                    <div class="question-group">
-                        <label class="question-label">10. What kind of visual mood appeals to you?<span
-                                class="required-star">*</span></label>
-                        <div class="options-list">
-                            <label class="option-item"><input type="radio" name="mood" value="light" required> Light and
-                                bright</label>
-                            <label class="option-item"><input type="radio" name="mood" value="dark"> Dark and
-                                modern</label>
-                            <label class="option-item"><input type="radio" name="mood" value="vibrant"> Colorful and
-                                vibrant</label>
-                            <label class="option-item"><input type="radio" name="mood" value="minimal"> Minimal and
-                                clean</label>
+                        <div class="question-group">
+                            <label class="question-label">4. Who will use your platform the most? (Select all that
+                                apply)<span class="required-star">*</span></label>
+                            <div class="options-list">
+                                <label class="option-item"><input type="checkbox" name="usage_group" value="students">
+                                    Students (high school or college)</label>
+                                <label class="option-item"><input type="checkbox" name="usage_group"
+                                        value="professionals">
+                                    Working professionals</label>
+                                <label class="option-item"><input type="checkbox" name="usage_group" value="friends">
+                                    Friend
+                                    groups</label>
+                                <label class="option-item"><input type="checkbox" name="usage_group"
+                                        value="communities">
+                                    Online communities</label>
+                                <label class="option-item"><input type="checkbox" name="usage_group" value="creators">
+                                    Content creators</label>
+                                <label class="option-item"><input type="checkbox" name="usage_group" value="remote">
+                                    Freelancers / remote workers</label>
+                                <label class="option-item"><input type="checkbox" name="usage_group" value="hobbyists">
+                                    Hobbyists and interest groups</label>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="question-group">
-                        <label class="question-label">11. Are there any brands whose look you really like?</label>
-                        <span class="help-text">Example: "I love how Spotify looks—clean and modern" or "Notion's
-                            simplicity"</span>
-                        <textarea name="brand_inspiration" placeholder="Share your inspirations..."></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Section 6: User Feelings -->
-            <div class="form-section" data-step="6">
-                <div class="card">
-                    <h2 class="section-title">Step 6: Desired User Experience</h2>
-                    <p class="section-description">"How should users feel when they use your platform?"</p>
-
-                    <div class="question-group">
-                        <label class="question-label">12. How should users feel when using your platform? (Select all
-                            that
-                            apply)<span class="required-star">*</span></label>
-                        <div class="options-list" style="grid-template-columns: 1fr 1fr;">
-                            <label class="option-item"><input type="checkbox" name="feelings" value="safe"> Safe and
-                                private</label>
-                            <label class="option-item"><input type="checkbox" name="feelings" value="relaxed"> Relaxed
-                                and comfortable</label>
-                            <label class="option-item"><input type="checkbox" name="feelings" value="energized">
-                                Energized and engaged</label>
-                            <label class="option-item"><input type="checkbox" name="feelings" value="connected">
-                                Connected to others</label>
-                            <label class="option-item"><input type="checkbox" name="feelings" value="free"> Free to be
-                                themselves</label>
-                            <label class="option-item"><input type="checkbox" name="feelings" value="productive">
-                                Productive and focused</label>
-                            <label class="option-item"><input type="checkbox" name="feelings" value="happy"> Entertained
-                                and happy</label>
+                        <div class="question-group">
+                            <label class="question-label">5. What age group are your main users?<span
+                                    class="required-star">*</span></label>
+                            <div class="options-list">
+                                <label class="option-item"><input type="radio" name="age_group" value="u18" required>
+                                    Under
+                                    18</label>
+                                <label class="option-item"><input type="radio" name="age_group" value="18-24">
+                                    18-24</label>
+                                <label class="option-item"><input type="radio" name="age_group" value="25-34">
+                                    25-34</label>
+                                <label class="option-item"><input type="radio" name="age_group" value="35-44">
+                                    35-44</label>
+                                <label class="option-item"><input type="radio" name="age_group" value="45+"> 45+</label>
+                                <label class="option-item"><input type="radio" name="age_group" value="all"> All
+                                    ages</label>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Section 7: Essence -->
-            <div class="form-section" data-step="7">
-                <div class="card">
-                    <h2 class="section-title">Step 7: One-Line Brand Summary</h2>
-                    <p class="section-description">"Let's capture the essence of your brand in one simple sentence."</p>
+                <!-- Section 3: Brand Personality -->
+                <div class="form-section" data-step="3">
+                    <div class="card">
+                        <h2 class="section-title">Step 3: Brand Personality</h2>
+                        <p class="section-description">"If your brand was a person, how would they act and feel? Choose
+                            what
+                            feels right."</p>
 
-                    <div class="question-group">
-                        <label class="question-label">13. Complete this: "Our platform is like ______ for people who
-                            want
-                            ______."<span class="required-star">*</span></label>
-                        <span class="help-text">Example: "Our platform is like a virtual coffee shop for people who want
-                            spontaneous conversations"</span>
-                        <textarea name="brand_essence" required placeholder="Complete the sentence..."></textarea>
-                    </div>
+                        <div class="question-group">
+                            <label class="question-label">6. How should your brand feel? (Select all that fit)<span
+                                    class="required-star">*</span></label>
+                            <div class="options-list" style="grid-template-columns: 1fr 1fr;">
+                                <label class="option-item"><input type="checkbox" name="personality" value="friendly">
+                                    Friendly</label>
+                                <label class="option-item"><input type="checkbox" name="personality"
+                                        value="professional">
+                                    Professional</label>
+                                <label class="option-item"><input type="checkbox" name="personality" value="serious">
+                                    Serious and focused</label>
+                                <label class="option-item"><input type="checkbox" name="personality" value="calm"> Calm
+                                    and
+                                    relaxing</label>
+                                <label class="option-item"><input type="checkbox" name="personality" value="energetic">
+                                    Energetic and bold</label>
+                                <label class="option-item"><input type="checkbox" name="personality" value="warm"> Warm
+                                    and
+                                    welcoming</label>
+                                <label class="option-item"><input type="checkbox" name="personality" value="safe"> Safe
+                                    and
+                                    trustworthy</label>
+                            </div>
+                        </div>
 
-                    <div class="question-group">
-                        <label class="question-label">14. Is there anything else you'd like us to know?</label>
-                        <textarea name="additional_info"
-                            placeholder="Share any other thoughts, concerns, or ideas..."></textarea>
+                        <div class="question-group">
+                            <label class="question-label">7. Which side feels more like your brand?<span
+                                    class="required-star">*</span></label>
+
+                            <div class="scale-container">
+                                <div class="scale-row">
+                                    <span class="scale-label left">Friendly and casual</span>
+                                    <div class="scale-options" data-scale="casual_vs_pro">
+                                        <div class="scale-option" data-value="1">1</div>
+                                        <div class="scale-option" data-value="2">2</div>
+                                        <div class="scale-option" data-value="3">3</div>
+                                        <div class="scale-option" data-value="4">4</div>
+                                        <div class="scale-option" data-value="5">5</div>
+                                    </div>
+                                    <span class="scale-label right">Professional and polished</span>
+                                </div>
+
+                                <div class="scale-row">
+                                    <span class="scale-label left">Fun and playful</span>
+                                    <div class="scale-options" data-scale="playful_vs_serious">
+                                        <div class="scale-option" data-value="1">1</div>
+                                        <div class="scale-option" data-value="2">2</div>
+                                        <div class="scale-option" data-value="3">3</div>
+                                        <div class="scale-option" data-value="4">4</div>
+                                        <div class="scale-option" data-value="5">5</div>
+                                    </div>
+                                    <span class="scale-label right">Serious and focused</span>
+                                </div>
+
+                                <div class="scale-row">
+                                    <span class="scale-label left">Bold and loud</span>
+                                    <div class="scale-options" data-scale="bold_vs_calm">
+                                        <div class="scale-option" data-value="1">1</div>
+                                        <div class="scale-option" data-value="2">2</div>
+                                        <div class="scale-option" data-value="3">3</div>
+                                        <div class="scale-option" data-value="4">4</div>
+                                        <div class="scale-option" data-value="5">5</div>
+                                    </div>
+                                    <span class="scale-label right">Calm and gentle</span>
+                                </div>
+
+                                <div class="scale-row">
+                                    <span class="scale-label left">Simple and minimal</span>
+                                    <div class="scale-options" data-scale="minimal_vs_detailed">
+                                        <div class="scale-option" data-value="1">1</div>
+                                        <div class="scale-option" data-value="2">2</div>
+                                        <div class="scale-option" data-value="3">3</div>
+                                        <div class="scale-option" data-value="4">4</div>
+                                        <div class="scale-option" data-value="5">5</div>
+                                    </div>
+                                    <span class="scale-label right">Rich and detailed</span>
+                                </div>
+
+                                <div class="scale-row">
+                                    <span class="scale-label left">Young and fresh</span>
+                                    <div class="scale-options" data-scale="young_vs_mature">
+                                        <div class="scale-option" data-value="1">1</div>
+                                        <div class="scale-option" data-value="2">2</div>
+                                        <div class="scale-option" data-value="3">3</div>
+                                        <div class="scale-option" data-value="4">4</div>
+                                        <div class="scale-option" data-value="5">5</div>
+                                    </div>
+                                    <span class="scale-label right">Mature and established</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="card" id="completionCard" style="display: none; text-align: center;">
-                    <h2 style="color: var(--accent-color); font-size: 2.5rem; margin-bottom: 1.5rem;">Thank you! 🎉</h2>
-                    <p>Your answers will help us create a brand that truly represents your platform. We'll review
-                        everything and get back to you soon with ideas and options.</p>
+                <!-- Section 4: Brand Voice -->
+                <div class="form-section" data-step="4">
+                    <div class="card">
+                        <h2 class="section-title">Step 4: Brand Voice</h2>
+                        <p class="section-description">"How should your platform communicate with users? Think about app
+                            messages, notifications, and website copy."</p>
+
+                        <div class="question-group">
+                            <label class="question-label">8. Are there any words or tone you want to AVOID?</label>
+                            <span class="help-text">Example: "No corporate jargon or technical terms" or "Nothing too
+                                cutesy
+                                or childish"</span>
+                            <textarea name="avoid_tone" placeholder="Describe what to avoid..."></textarea>
+                        </div>
+                    </div>
                 </div>
-            </div>
+
+                <!-- Section 5: Look & Feel -->
+                <div class="form-section" data-step="5">
+                    <div class="card">
+                        <h2 class="section-title">Step 5: Look & Feel Preferences</h2>
+                        <p class="section-description">"While we'll explore many options, it helps to know what
+                            naturally
+                            attracts you."</p>
+
+                        <div class="question-group">
+                            <label class="question-label">9. Do you have any color preferences?</label>
+                            <span class="help-text">Example: "Blues and purples feel calming" or "Bright, warm colors
+                                like
+                                orange and yellow"</span>
+                            <textarea name="color_preferences" placeholder="e.g. No preference yet"></textarea>
+                        </div>
+
+                        <div class="question-group">
+                            <label class="question-label">10. What kind of visual mood appeals to you?<span
+                                    class="required-star">*</span></label>
+                            <div class="options-list">
+                                <label class="option-item"><input type="radio" name="mood" value="light" required> Light
+                                    and
+                                    bright</label>
+                                <label class="option-item"><input type="radio" name="mood" value="dark"> Dark and
+                                    modern</label>
+                                <label class="option-item"><input type="radio" name="mood" value="vibrant"> Colorful and
+                                    vibrant</label>
+                                <label class="option-item"><input type="radio" name="mood" value="minimal"> Minimal and
+                                    clean</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <label class="question-label">11. Are there any brands whose look you really like?</label>
+                            <span class="help-text">Example: "I love how Spotify looks—clean and modern" or "Notion's
+                                simplicity"</span>
+                            <textarea name="brand_inspiration" placeholder="Share your inspirations..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 6: User Feelings -->
+                <div class="form-section" data-step="6">
+                    <div class="card">
+                        <h2 class="section-title">Step 6: Desired User Experience</h2>
+                        <p class="section-description">"How should users feel when they use your platform?"</p>
+
+                        <div class="question-group">
+                            <label class="question-label">12. How should users feel when using your platform? (Select
+                                all
+                                that
+                                apply)<span class="required-star">*</span></label>
+                            <div class="options-list" style="grid-template-columns: 1fr 1fr;">
+                                <label class="option-item"><input type="checkbox" name="feelings" value="safe"> Safe and
+                                    private</label>
+                                <label class="option-item"><input type="checkbox" name="feelings" value="relaxed">
+                                    Relaxed
+                                    and comfortable</label>
+                                <label class="option-item"><input type="checkbox" name="feelings" value="energized">
+                                    Energized and engaged</label>
+                                <label class="option-item"><input type="checkbox" name="feelings" value="connected">
+                                    Connected to others</label>
+                                <label class="option-item"><input type="checkbox" name="feelings" value="free"> Free to
+                                    be
+                                    themselves</label>
+                                <label class="option-item"><input type="checkbox" name="feelings" value="productive">
+                                    Productive and focused</label>
+                                <label class="option-item"><input type="checkbox" name="feelings" value="happy">
+                                    Entertained
+                                    and happy</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 7: Essence -->
+                <div class="form-section" data-step="7">
+                    <div class="card">
+                        <h2 class="section-title">Step 7: One-Line Brand Summary</h2>
+                        <p class="section-description">"Let's capture the essence of your brand in one simple sentence."
+                        </p>
+
+                        <div class="question-group">
+                            <label class="question-label">13. Complete this: "Our platform is like ______ for people who
+                                want
+                                ______."<span class="required-star">*</span></label>
+                            <span class="help-text">Example: "Our platform is like a virtual coffee shop for people who
+                                want
+                                spontaneous conversations"</span>
+                            <textarea name="brand_essence" required placeholder="Complete the sentence..."></textarea>
+                        </div>
+
+                        <div class="question-group">
+                            <label class="question-label">14. Is there anything else you'd like us to know?</label>
+                            <textarea name="additional_info"
+                                placeholder="Share any other thoughts, concerns, or ideas..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="card" id="completionCard" style="display: none; text-align: center;">
+                        <h2 style="color: var(--accent-color); font-size: 2.5rem; margin-bottom: 1.5rem;">Thank you! 🎉
+                        </h2>
+                        <p>Your answers will help us create a brand that truly represents your platform. We'll review
+                            everything and get back to you soon with ideas and options.</p>
+                    </div>
+                </div>
+
+            </div> <!-- End discoveryCard -->
 
             <!-- Nav Buttons -->
             <div class="nav-buttons">

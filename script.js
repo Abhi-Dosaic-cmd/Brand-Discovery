@@ -213,13 +213,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.querySelector('.progress-container').style.opacity = '0';
 
                 // Add Download Button to Completion Card
-                const completionCard = document.getElementById('completionCard');
+                const actionContainer = document.getElementById('pdfActionContainer');
+                actionContainer.innerHTML = ''; // Clear existing
+
                 const downloadBtn = document.createElement('button');
                 downloadBtn.className = 'btn btn-primary';
-                downloadBtn.style.marginTop = '2rem';
-                downloadBtn.innerHTML = '📥 Download Brand Strategy Brief (PDF)';
+                downloadBtn.style.margin = '10px';
+                downloadBtn.innerHTML = '📥 Download Brand strategy PDF';
                 downloadBtn.onclick = () => generatePDF(data);
-                completionCard.appendChild(downloadBtn);
+
+                const printBtn = document.createElement('button');
+                printBtn.className = 'btn btn-secondary';
+                printBtn.style.margin = '10px';
+                printBtn.innerHTML = '🖨️ Print Response copy';
+                printBtn.onclick = () => window.print();
+
+                actionContainer.appendChild(downloadBtn);
+                actionContainer.appendChild(printBtn);
 
                 createFloatingSparkles();
 

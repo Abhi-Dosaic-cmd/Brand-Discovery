@@ -171,7 +171,10 @@
 
                             <div class="scale-container">
                                 <div class="scale-row">
-                                    <span class="scale-label left">Friendly and casual</span>
+                                    <div class="scale-labels">
+                                        <span>Friendly and casual</span>
+                                        <span>Professional and polished</span>
+                                    </div>
                                     <div class="scale-options" data-scale="casual_vs_pro">
                                         <div class="scale-option" data-value="1">1</div>
                                         <div class="scale-option" data-value="2">2</div>
@@ -179,11 +182,13 @@
                                         <div class="scale-option" data-value="4">4</div>
                                         <div class="scale-option" data-value="5">5</div>
                                     </div>
-                                    <span class="scale-label right">Professional and polished</span>
                                 </div>
 
                                 <div class="scale-row">
-                                    <span class="scale-label left">Fun and playful</span>
+                                    <div class="scale-labels">
+                                        <span>Fun and playful</span>
+                                        <span>Serious and focused</span>
+                                    </div>
                                     <div class="scale-options" data-scale="playful_vs_serious">
                                         <div class="scale-option" data-value="1">1</div>
                                         <div class="scale-option" data-value="2">2</div>
@@ -191,11 +196,13 @@
                                         <div class="scale-option" data-value="4">4</div>
                                         <div class="scale-option" data-value="5">5</div>
                                     </div>
-                                    <span class="scale-label right">Serious and focused</span>
                                 </div>
 
                                 <div class="scale-row">
-                                    <span class="scale-label left">Bold and loud</span>
+                                    <div class="scale-labels">
+                                        <span>Bold and loud</span>
+                                        <span>Calm and gentle</span>
+                                    </div>
                                     <div class="scale-options" data-scale="bold_vs_calm">
                                         <div class="scale-option" data-value="1">1</div>
                                         <div class="scale-option" data-value="2">2</div>
@@ -203,11 +210,13 @@
                                         <div class="scale-option" data-value="4">4</div>
                                         <div class="scale-option" data-value="5">5</div>
                                     </div>
-                                    <span class="scale-label right">Calm and gentle</span>
                                 </div>
 
                                 <div class="scale-row">
-                                    <span class="scale-label left">Simple and minimal</span>
+                                    <div class="scale-labels">
+                                        <span>Simple and minimal</span>
+                                        <span>Rich and detailed</span>
+                                    </div>
                                     <div class="scale-options" data-scale="minimal_vs_detailed">
                                         <div class="scale-option" data-value="1">1</div>
                                         <div class="scale-option" data-value="2">2</div>
@@ -215,11 +224,13 @@
                                         <div class="scale-option" data-value="4">4</div>
                                         <div class="scale-option" data-value="5">5</div>
                                     </div>
-                                    <span class="scale-label right">Rich and detailed</span>
                                 </div>
 
                                 <div class="scale-row">
-                                    <span class="scale-label left">Young and fresh</span>
+                                    <div class="scale-labels">
+                                        <span>Young and fresh</span>
+                                        <span>Mature and established</span>
+                                    </div>
                                     <div class="scale-options" data-scale="young_vs_mature">
                                         <div class="scale-option" data-value="1">1</div>
                                         <div class="scale-option" data-value="2">2</div>
@@ -227,7 +238,6 @@
                                         <div class="scale-option" data-value="4">4</div>
                                         <div class="scale-option" data-value="5">5</div>
                                     </div>
-                                    <span class="scale-label right">Mature and established</span>
                                 </div>
                             </div>
                         </div>
@@ -351,10 +361,12 @@
                     </div>
 
                     <div class="card" id="completionCard" style="display: none; text-align: center;">
-                        <h2 style="color: var(--accent-color); font-size: 2.5rem; margin-bottom: 1.5rem;">Thank you! 🎉
+                        <h2 style="color: var(--accent-color); font-size: 2.5rem; margin-bottom: 1.5rem;">Response
+                            Submitted! 🎉
                         </h2>
-                        <p>Your answers will help us create a brand that truly represents your platform. We'll review
-                            everything and get back to you soon with ideas and options.</p>
+                        <p>Your answers have been securely saved. You can now download your Brand Strategy Brief below.
+                        </p>
+                        <div id="pdfActionContainer" style="margin-top: 2.5rem;"></div>
                     </div>
                 </div>
 
